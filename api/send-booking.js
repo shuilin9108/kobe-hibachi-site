@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Hibachi Booking <onboarding@resend.dev>',
+        from: 'Hibachi Booking <booking@shuilink.com>',
         to: ['shuilin9108@gmail.com'],
         reply_to: email,
         subject: '🔥 New Hibachi Booking Request',
