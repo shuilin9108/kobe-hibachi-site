@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     // ✅ 1. 发给老板
     const ownerPayload = {
       from: 'Kobe Hibachi <booking@shuilink.com>',
-      to: ['jasonzheng2016@gmail.com', 'zjxinnn@gmail.com'], // 👈 老板邮箱
+      to: ['jasonzheng2016@gmail.com', 'Zjxinnn@gmail.com'], // 👈 老板邮箱
       //cc: ['Zjxinnn@gmail.com'],
       reply_to: email,
       subject: '🔥 New Hibachi Booking Request',
