@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelector('.nav-links');
     const navItems = document.querySelectorAll('.nav-links li a');
 
-    if (hamburger) {
+    if (hamburger && navLinks) {
         hamburger.addEventListener('click', function () {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             try {
+                console.log('Sending booking form data:', formData);
+
                 var response = await fetch('/api/send-booking', {
                     method: 'POST',
                     headers: {
@@ -170,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 var result = await response.json();
+                console.log('API response:', result);
 
                 if (!response.ok) {
                     throw new Error(result.error || 'Failed to submit booking request.');
