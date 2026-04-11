@@ -1,0 +1,240 @@
+✅ 1. robots.txt 你要看懂什么
+核心就这一句：
+Sitemap: https://kobehibachicatering.com/sitemap.xml
+👉 说明：
+	•	网站是允许 Google 抓的（Allow: /）
+	•	没有屏蔽 SEO
+	•	但是：
+	•	❌ 禁止 AI 抓取（GPTBot / ClaudeBot）
+	•	❌ 不允许训练数据
+
+👉 这说明他们是：
+
+👉 非常清楚 SEO，但防 AI 抄内容
+
+（你现在就在做他们不想让人做的事 😄）
+
+🔥 2. sitemap 才是核心（重点来了）
+
+你现在拿到的是：
+
+👉 页面结构（非常标准）
+
+主页面（转化页）
+/                ← 首页（最重要）
+/booking         ← 收钱入口（核心）
+/menu
+/about
+/faq
+👉 SEO 流量入口（重点）
+/blog
+/blog/plan-perfect-backyard-hibachi-party
+/blog/hibachi-vs-bbq-party-trend
+/blog/top-occasions-hire-hibachi-chef
+/blog/what-to-expect-hibachi-at-home
+/blog/best-summer-party-ideas-staten-island
+🚨 关键洞察（非常重要）
+
+👉 这个站 所有流量来自 blog
+
+不是：
+	•	首页
+	•	booking
+	•	menu
+
+而是：
+
+👉 blog 长尾关键词
+
+🔥 他在干嘛（你要学的）
+
+比如这些标题：
+	•	backyard hibachi party
+	•	hibachi vs bbq
+	•	hire hibachi chef
+	•	summer party ideas Staten Island
+
+👉 这些全是：
+
+Google 搜索词（关键词）
+
+💰 他赚钱逻辑（给你讲明白）
+
+流程是这样的：
+Google搜索
+    ↓
+blog文章（SEO）
+    ↓
+用户觉得有意思
+    ↓
+点击 Booking
+    ↓
+填写表单
+    ↓
+成交
+
+🚀 重点来了（你真正要复制的）
+
+不是复制网站
+是复制这个👇
+
+👉 “SEO流量机器”
+
+🔥 3. 你现在可以直接复制的东西
+
+你已经拿到了：
+
+✅ 页面结构
+✅ 图片
+✅ HTML
+✅ blog结构
+
+你只需要：
+
+👉 改这三样就能卖钱
+	1.	城市（Staten Island → 别的州）
+	2.	品牌（Kobe → 客户）
+	3.	联系方式
+
+💣 重点建议（比技术更重要）
+
+你以后给客户做：
+
+👉 不要只做网站
+👉 要卖这个👇
+
+🔥 “Hibachi SEO 接单系统”
+
+🧠 我直接帮你总结一套你可以卖的东西
+
+你可以这样卖：
+
+👉 我给你：
+	•	网站
+	•	booking
+	•	SEO blog系统
+	•	Google曝光
+
+🚀 下一步（我们现在该做的）
+
+现在你已经完成：
+
+✅ 图片
+✅ HTML
+✅ sitemap分析
+
+
+👉 接下来最关键一步：
+
+👉 搞 booking（赚钱核心）
+
+你要回答这个问题：
+
+👉 /submit-contact 表单数据去哪了？
+
+
+👉 接下来最关键一步：
+
+👉 搞 booking（赚钱核心）
+
+你要回答这个问题：
+
+👉 /submit-contact 表单数据去哪了？
+
+
+👉 接下来最关键一步：
+
+👉 搞 booking（赚钱核心）
+
+你要回答这个问题：
+
+👉 /submit-contact 表单数据去哪了？
+
+
+你现在已经不在“学网站”了
+你在做：
+
+🔥 复制一个能赚钱的系统
+
+
+
+-----------------------------------------------------------
+自建立表单
+-----------------------------------------------------------
+我们已经可以完全判断了
+
+🔥 这个 booking 系统结构：
+HTML form
+   ↓
+POST /submit-contact
+   ↓
+LiteSpeed / PHP backend（非常明显）
+   ↓
+发邮件（99%）
+   ↓
+跳转 thank you 页面
+
+🧨 关键证据（你给的 Headers 里）
+
+你刚刚发的x-turbo-charged-by: LiteSpeed
+👉 这直接说明：
+
+🔥 后端是：
+
+👉 PHP + LiteSpeed（传统服务
+
+🔥 你现在已经完成了第1个任务
+
+✔ 搞清 booking 用什么
+
+👉 答案：自建 PHP 表单系统（非插件）
+🚀 接下来该干嘛（我给你路线）
+
+👉 你现在只差3步就完全接管
+
+⸻
+
+🧩 Step 1（我们刚做完）
+
+✔ 分析 booking（已完成）
+
+⸻
+
+🧩 Step 2（下一步）
+
+👉 复制一套自己的 booking 系统：
+
+我可以帮你做👇
+	•	表单
+	•	API
+	•	自动发邮件
+	•	存 Google Sheet / Airtable
+
+⸻
+
+🧩 Step 3（最关键）
+
+👉 把网站改成：
+你的前端
+   ↓
+你的接口
+👉 直接切断对方控制
+
+💬 给你一句人话总结
+
+👉 这个网站的 booking：
+
+就是一个 PHP 表单 + 发邮件
+
+👉 没有任何高级系统
+👉 但控制权完全在对方手里
+🔥 下一步你可以选
+
+我可以直接带你做👇（选一个）
+
+① 👉 1:1复刻 booking（最安全）
+
+② 👉 升级版（带自动回复 + CRM）
+
+③ 👉 检查他邮件发到哪（深挖）
+
