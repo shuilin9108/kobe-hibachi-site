@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  console.log('SEND-BOOKING VERSION: dual email + google sheet');
+  console.log('SEND-BOOKING VERSION: dual email + google sheet final');
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
     const { name, phone, email, date, guests, address, service, message } = req.body;
 
-    // ✅ 1. 发给老板
+    // 1. 发给老板
     const ownerPayload = {
       from: 'Kobe Hibachi <booking@shuilink.com>',
       to: ['jasonzheng2016@gmail.com', 'zjxinnn@gmail.com'],
@@ -16,7 +16,6 @@ export default async function handler(req, res) {
       subject: '🔥 New Hibachi Booking Request',
       html: `
         <h2>🔥 New Booking Request</h2>
-
         <p><strong>Name:</strong> ${name || ''}</p>
         <p><strong>Phone:</strong> ${phone || ''}</p>
         <p><strong>Click to Call:</strong> <a href="tel:${phone || ''}">${phone || ''}</a></p>
@@ -50,7 +49,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // ✅ 2. 发给客户确认邮件
+    // 2. 发给客户确认邮件
     if (email && email.includes('@')) {
       const customerPayload = {
         from: 'Kobe Hibachi <booking@shuilink.com>',
@@ -59,22 +58,15 @@ export default async function handler(req, res) {
         html: `
           <div style="font-family: Arial, sans-serif; line-height: 1.6;">
             <h2>Hi ${name || 'there'} 👋</h2>
-
             <p>We’ve received your hibachi booking request 🔥</p>
-
             <p><strong>Date:</strong> ${date || ''}</p>
             <p><strong>Guests:</strong> ${guests || ''}</p>
             <p><strong>Location:</strong> ${address || ''}</p>
             <p><strong>Occasion:</strong> ${service || ''}</p>
-
             <br/>
-
             <p>Our team will contact you shortly to confirm your booking.</p>
-
             <br/>
-
             <p>Thank you for choosing <strong>Kobe Hibachi</strong> 🍱🔥</p>
-
             <p style="margin-top:20px;">– Kobe Hibachi Team</p>
           </div>
         `,
@@ -95,39 +87,42 @@ export default async function handler(req, res) {
       console.log('CUSTOMER EMAIL DATA:', customerData);
     }
 
-    // ✅ 3. 写入 Google Sheet
+    // 3. 写入 Google Sheet
     try {
-      const sheetResponse = await fetch('https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          date,
-          guests,
-          address,
-          service,
-          message,
-        }),
-      });
+      const sheetPayload = {
+        name,
+        phone,
+        email,
+        date,
+        guests,
+        address,
+        service,
+        message,
+      };
 
-      const sheetData = await sheetResponse.json().catch(() => null);
+      const sheetResponse = await fetch(
+        'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(sheetPayload),
+        }
+      );
+
+      const sheetText = await sheetResponse.text();
 
       console.log('GOOGLE SHEET STATUS:', sheetResponse.status);
-      console.log('GOOGLE SHEET DATA:', sheetData);
+      console.log('GOOGLE SHEET RAW RESPONSE:', sheetText);
     } catch (sheetError) {
       console.error('GOOGLE SHEET ERROR:', sheetError);
     }
 
-    // ✅ 最终返回
     return res.status(200).json({
       success: true,
       message: 'Emails sent successfully and booking saved',
     });
-
   } catch (error) {
     console.error('SEND-BOOKING ERROR:', error);
     return res.status(500).json({ error: error.message || 'Server error' });
