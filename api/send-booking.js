@@ -8,11 +8,16 @@ function escapeHtml(value) {
 }
 
 export default async function handler(req, res) {
-  console.log("SEND-BOOKING VERSION: email + sheet + deposit info");
+  console.log("SEND-BOOKING VERSION: debug resend + sheet + deposit info");
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
+
+  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+  console.log("RESEND KEY EXISTS:", !!RESEND_API_KEY);
+  console.log("REQ METHOD:", req.method);
 
   try {
     const {
@@ -41,8 +46,8 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error("Missing RESEND_API_KEY");
+    if (!RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY in runtime");
       return res.status(500).json({
         error: "Server email configuration is missing",
       });
@@ -75,7 +80,7 @@ export default async function handler(req, res) {
     const ownerResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(ownerPayload),
@@ -123,7 +128,7 @@ export default async function handler(req, res) {
       const customerResponse = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${RESEND_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(customerPayload),
