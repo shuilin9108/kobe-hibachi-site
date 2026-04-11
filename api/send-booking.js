@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  console.log('SEND-BOOKING VERSION: dual email system');
+  console.log('SEND-BOOKING VERSION: dual email + google sheet');
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -11,8 +11,7 @@ export default async function handler(req, res) {
     // ✅ 1. 发给老板
     const ownerPayload = {
       from: 'Kobe Hibachi <booking@shuilink.com>',
-      to: ['jasonzheng2016@gmail.com', 'Zjxinnn@gmail.com'], // 👈 老板邮箱
-      //cc: ['Zjxinnn@gmail.com'],
+      to: ['jasonzheng2016@gmail.com', 'zjxinnn@gmail.com'],
       reply_to: email,
       subject: '🔥 New Hibachi Booking Request',
       html: `
@@ -20,6 +19,7 @@ export default async function handler(req, res) {
 
         <p><strong>Name:</strong> ${name || ''}</p>
         <p><strong>Phone:</strong> ${phone || ''}</p>
+        <p><strong>Click to Call:</strong> <a href="tel:${phone || ''}">${phone || ''}</a></p>
         <p><strong>Email:</strong> ${email || ''}</p>
         <p><strong>Date:</strong> ${date || ''}</p>
         <p><strong>Guests:</strong> ${guests || ''}</p>
@@ -50,14 +50,14 @@ export default async function handler(req, res) {
       });
     }
 
-    // ✅ 2. 发给客户（确认邮件）
-    if (email) {
+    // ✅ 2. 发给客户确认邮件
+    if (email && email.includes('@')) {
       const customerPayload = {
         from: 'Kobe Hibachi <booking@shuilink.com>',
-        to: [email], // 👈 客户邮箱
+        to: [email],
         subject: '🔥 Your Hibachi Booking Request Received',
         html: `
-          <div style="font-family: Arial; line-height: 1.6;">
+          <div style="font-family: Arial, sans-serif; line-height: 1.6;">
             <h2>Hi ${name || 'there'} 👋</h2>
 
             <p>We’ve received your hibachi booking request 🔥</p>
@@ -65,6 +65,7 @@ export default async function handler(req, res) {
             <p><strong>Date:</strong> ${date || ''}</p>
             <p><strong>Guests:</strong> ${guests || ''}</p>
             <p><strong>Location:</strong> ${address || ''}</p>
+            <p><strong>Occasion:</strong> ${service || ''}</p>
 
             <br/>
 
@@ -94,10 +95,37 @@ export default async function handler(req, res) {
       console.log('CUSTOMER EMAIL DATA:', customerData);
     }
 
+    // ✅ 3. 写入 Google Sheet
+    try {
+      const sheetResponse = await fetch('https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          date,
+          guests,
+          address,
+          service,
+          message,
+        }),
+      });
+
+      const sheetData = await sheetResponse.json().catch(() => null);
+
+      console.log('GOOGLE SHEET STATUS:', sheetResponse.status);
+      console.log('GOOGLE SHEET DATA:', sheetData);
+    } catch (sheetError) {
+      console.error('GOOGLE SHEET ERROR:', sheetError);
+    }
+
     // ✅ 最终返回
     return res.status(200).json({
       success: true,
-      message: 'Emails sent successfully',
+      message: 'Emails sent successfully and booking saved',
     });
 
   } catch (error) {
