@@ -89,25 +89,25 @@ export default async function handler(req, res) {
 
     // 3. 写入 Google Sheet
     try {
-      const sheetPayload = {
-        name,
-        phone,
-        email,
-        date,
-        guests,
-        address,
-        service,
-        message,
-      };
+      const params = new URLSearchParams({
+        name: name || '',
+        phone: phone || '',
+        email: email || '',
+        date: date || '',
+        guests: guests || '',
+        address: address || '',
+        service: service || '',
+        message: message || '',
+      });
 
       const sheetResponse = await fetch(
         'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec',
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'text/plain;charset=utf-8',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify(sheetPayload),
+          body: params.toString(),
         }
       );
 
