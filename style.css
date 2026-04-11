@@ -1423,14 +1423,16 @@ footer {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* ShuiLink 品牌色（蓝） */
 .footer-partner a {
-    color: var(--accent-color);
+    color: #2563eb;
+    font-weight: 600;
     text-decoration: none;
     transition: var(--transition);
 }
 
 .footer-partner a:hover {
-    color: var(--white);
+    color: #1d4ed8;
 }
 
 /* ============================================
