@@ -112,8 +112,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var bookingForm = document.getElementById('bookingForm');
 
     if (bookingForm) {
+        let isSubmitting = false;
+        let lastSubmitTime = 0;
+
         bookingForm.addEventListener('submit', async function (e) {
             e.preventDefault();
+
+            if (isSubmitting) {
+                return;
+            }
+
+            var now = Date.now();
+            if (now - lastSubmitTime < 8000) {
+                alert('Please wait a few seconds before submitting again.');
+                return;
+            }
 
             var requiredFields = bookingForm.querySelectorAll('[required]');
             var isValid = true;
@@ -141,6 +154,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
+            var captchaField = document.getElementById('captcha');
+            if (!captchaField || captchaField.value.trim() !== '7') {
+                alert('Spam check failed. Please answer the math question correctly.');
+                if (captchaField) {
+                    captchaField.focus();
+                    captchaField.style.borderColor = '#ff4d00';
+                    captchaField.addEventListener('input', function () {
+                        this.style.borderColor = '';
+                    }, { once: true });
+                }
+                return;
+            }
+
             var submitButton = bookingForm.querySelector('button[type="submit"]');
             var originalButtonText = submitButton ? submitButton.textContent : '';
 
@@ -148,6 +174,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 submitButton.disabled = true;
                 submitButton.textContent = 'Submitting...';
             }
+
+            isSubmitting = true;
+            lastSubmitTime = now;
 
             var formData = {
                 name: bookingForm.name.value.trim(),
@@ -188,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     submitButton.disabled = false;
                     submitButton.textContent = originalButtonText;
                 }
+                isSubmitting = false;
             }
         });
     }
