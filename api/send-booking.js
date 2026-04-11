@@ -8,7 +8,7 @@ function escapeHtml(value) {
 }
 
 export default async function handler(req, res) {
-  console.log("SEND-BOOKING VERSION: debug resend + sheet + deposit info");
+  console.log("SEND-BOOKING VERSION: with time + source + birthday + sheet");
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -25,9 +25,13 @@ export default async function handler(req, res) {
       phone = "",
       email = "",
       date = "",
+      time = "",
       guests = "",
+      hearAboutUs = "",
       address = "",
       service = "",
+      birthMonth = "",
+      birthDay = "",
       message = "",
     } = req.body || {};
 
@@ -35,12 +39,25 @@ export default async function handler(req, res) {
     const cleanPhone = escapeHtml(phone.trim());
     const cleanEmail = escapeHtml(email.trim());
     const cleanDate = escapeHtml(date);
+    const cleanTime = escapeHtml(time);
     const cleanGuests = escapeHtml(guests);
+    const cleanHearAboutUs = escapeHtml(hearAboutUs);
     const cleanAddress = escapeHtml(address.trim());
     const cleanService = escapeHtml(service);
+    const cleanBirthMonth = escapeHtml(birthMonth);
+    const cleanBirthDay = escapeHtml(birthDay);
     const cleanMessage = escapeHtml(message.trim());
 
-    if (!cleanName || !cleanPhone || !cleanEmail || !cleanDate || !cleanGuests || !cleanAddress) {
+    if (
+      !cleanName ||
+      !cleanPhone ||
+      !cleanEmail ||
+      !cleanDate ||
+      !cleanTime ||
+      !cleanGuests ||
+      !cleanHearAboutUs ||
+      !cleanAddress
+    ) {
       return res.status(400).json({
         error: "Missing required fields",
       });
@@ -52,6 +69,11 @@ export default async function handler(req, res) {
         error: "Server email configuration is missing",
       });
     }
+
+    const birthdayDisplay =
+      cleanBirthMonth && cleanBirthDay
+        ? `${cleanBirthMonth} ${cleanBirthDay}`
+        : "Not provided";
 
     // 1. 发给老板
     const ownerPayload = {
@@ -67,9 +89,12 @@ export default async function handler(req, res) {
           <p><strong>Click to Call:</strong> <a href="tel:${cleanPhone}">${cleanPhone}</a></p>
           <p><strong>Email:</strong> ${cleanEmail}</p>
           <p><strong>Date:</strong> ${cleanDate}</p>
+          <p><strong>Preferred Time:</strong> ${cleanTime}</p>
           <p><strong>Guests:</strong> ${cleanGuests}</p>
+          <p><strong>How did they hear about us?</strong> ${cleanHearAboutUs}</p>
           <p><strong>Address:</strong> ${cleanAddress}</p>
-          <p><strong>Occasion:</strong> ${cleanService}</p>
+          <p><strong>Occasion:</strong> ${cleanService || "Not provided"}</p>
+          <p><strong>Birthday:</strong> ${birthdayDisplay}</p>
           <p><strong>Details:</strong> ${cleanMessage || "None"}</p>
           <hr style="margin: 20px 0;" />
           <p><strong>Deposit:</strong> Customer should send a $50 Zelle deposit to secure the date.</p>
@@ -112,9 +137,10 @@ export default async function handler(req, res) {
             <h2>Hi ${cleanName || "there"} 👋</h2>
             <p>We’ve received your hibachi booking request 🔥</p>
             <p><strong>Date:</strong> ${cleanDate}</p>
+            <p><strong>Preferred Time:</strong> ${cleanTime}</p>
             <p><strong>Guests:</strong> ${cleanGuests}</p>
             <p><strong>Location:</strong> ${cleanAddress}</p>
-            <p><strong>Occasion:</strong> ${cleanService}</p>
+            <p><strong>Occasion:</strong> ${cleanService || "Not provided"}</p>
             <br/>
             <p>To secure your date, please send a <strong>$50 deposit</strong> via Zelle.</p>
             <p><strong>Zelle recipient:</strong> SHIPING ZHENG</p>
@@ -157,9 +183,13 @@ export default async function handler(req, res) {
       sheetUrl.searchParams.set("phone", phone || "");
       sheetUrl.searchParams.set("email", email || "");
       sheetUrl.searchParams.set("date", date || "");
+      sheetUrl.searchParams.set("time", time || "");
       sheetUrl.searchParams.set("guests", guests || "");
+      sheetUrl.searchParams.set("hearAboutUs", hearAboutUs || "");
       sheetUrl.searchParams.set("address", address || "");
       sheetUrl.searchParams.set("service", service || "");
+      sheetUrl.searchParams.set("birthMonth", birthMonth || "");
+      sheetUrl.searchParams.set("birthDay", birthDay || "");
       sheetUrl.searchParams.set("message", message || "");
 
       const sheetResponse = await fetch(sheetUrl.toString(), {
