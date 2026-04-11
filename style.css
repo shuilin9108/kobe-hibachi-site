@@ -476,7 +476,7 @@ section {
 
 /* Step connector arrows */
 .steps-grid .step-card:not(:last-child)::after {
-    content: 'â†’';
+    content: '\2192';
     position: absolute;
     right: -28px;
     top: 50%;
@@ -718,7 +718,7 @@ section {
 }
 
 .package-card ul li::before {
-    content: 'âœ“';
+    content: '\2714';
     color: var(--accent-color);
     font-weight: 700;
     margin-right: 10px;
@@ -779,7 +779,7 @@ section {
 }
 
 .included-list li::before {
-    content: 'ðŸ”¥';
+    content: '\1F525';
     margin-right: 10px;
 }
 
