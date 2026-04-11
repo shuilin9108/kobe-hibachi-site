@@ -73,6 +73,9 @@ export default async function handler(req, res) {
           <p><strong>Details:</strong> ${cleanMessage || "None"}</p>
           <hr style="margin: 20px 0;" />
           <p><strong>Deposit:</strong> Customer should send a $50 Zelle deposit to secure the date.</p>
+          <p><strong>Zelle recipient:</strong> SHIPING ZHENG</p>
+          <p><strong>Zelle number:</strong> (646) 388-2989</p>
+          <p><strong>Venmo:</strong> Coming soon</p>
         </div>
       `,
     };
@@ -114,7 +117,11 @@ export default async function handler(req, res) {
             <p><strong>Occasion:</strong> ${cleanService}</p>
             <br/>
             <p>To secure your date, please send a <strong>$50 deposit</strong> via Zelle.</p>
-            <p><strong>Zelle:</strong> (347) 793-6589</p>
+            <p><strong>Zelle recipient:</strong> SHIPING ZHENG</p>
+            <p><strong>Zelle number:</strong> (646) 388-2989</p>
+            <p>This is the authorized deposit recipient for Kobe Hibachi bookings.</p>
+            <br/>
+            <p><strong>Venmo:</strong> Coming soon</p>
             <p>After payment, please reply with a screenshot or text confirmation.</p>
             <br/>
             <p>Our team will contact you shortly to confirm your booking.</p>
