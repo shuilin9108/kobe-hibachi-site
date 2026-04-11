@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  console.log('SEND-BOOKING VERSION: dual email + google sheet redirect fix');
+  console.log('SEND-BOOKING VERSION: dual email + google sheet GET fix');
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -87,55 +87,30 @@ export default async function handler(req, res) {
       console.log('CUSTOMER EMAIL DATA:', customerData);
     }
 
-    // 3. 写入 Google Sheet（手动处理 redirect）
+    // 3. 写入 Google Sheet（改用 GET，避开 Google POST 跳转问题）
     try {
-      const params = new URLSearchParams({
-        name: name || '',
-        phone: phone || '',
-        email: email || '',
-        date: date || '',
-        guests: guests || '',
-        address: address || '',
-        service: service || '',
-        message: message || '',
+      const sheetUrl = new URL(
+        'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec'
+      );
+
+      sheetUrl.searchParams.set('name', name || '');
+      sheetUrl.searchParams.set('phone', phone || '');
+      sheetUrl.searchParams.set('email', email || '');
+      sheetUrl.searchParams.set('date', date || '');
+      sheetUrl.searchParams.set('guests', guests || '');
+      sheetUrl.searchParams.set('address', address || '');
+      sheetUrl.searchParams.set('service', service || '');
+      sheetUrl.searchParams.set('message', message || '');
+
+      const sheetResponse = await fetch(sheetUrl.toString(), {
+        method: 'GET',
       });
 
-      const scriptUrl =
-        'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec';
+      const sheetText = await sheetResponse.text();
 
-      const firstResponse = await fetch(scriptUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: params.toString(),
-        redirect: 'manual',
-      });
-
-      const redirectUrl = firstResponse.headers.get('location');
-
-      console.log('GOOGLE SHEET FIRST STATUS:', firstResponse.status);
-      console.log('GOOGLE SHEET REDIRECT URL:', redirectUrl);
-
-      let finalResponse;
-
-      if (redirectUrl) {
-        finalResponse = await fetch(redirectUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: params.toString(),
-        });
-      } else {
-        finalResponse = firstResponse;
-      }
-
-      const finalText = await finalResponse.text();
-
-      console.log('GOOGLE SHEET FINAL STATUS:', finalResponse.status);
-      console.log('GOOGLE SHEET FINAL URL:', finalResponse.url);
-      console.log('GOOGLE SHEET RAW RESPONSE:', finalText);
+      console.log('GOOGLE SHEET STATUS:', sheetResponse.status);
+      console.log('GOOGLE SHEET FINAL URL:', sheetResponse.url);
+      console.log('GOOGLE SHEET RAW RESPONSE:', sheetText);
     } catch (sheetError) {
       console.error('GOOGLE SHEET ERROR:', sheetError);
     }
