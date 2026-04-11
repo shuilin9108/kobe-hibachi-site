@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  console.log('SEND-BOOKING VERSION: dual email + google sheet final');
+  console.log('SEND-BOOKING VERSION: dual email + google sheet redirect fix');
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -87,7 +87,7 @@ export default async function handler(req, res) {
       console.log('CUSTOMER EMAIL DATA:', customerData);
     }
 
-    // 3. 写入 Google Sheet
+    // 3. 写入 Google Sheet（手动处理 redirect）
     try {
       const params = new URLSearchParams({
         name: name || '',
@@ -100,28 +100,49 @@ export default async function handler(req, res) {
         message: message || '',
       });
 
-      const sheetResponse = await fetch(
-        'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec',
-        {
+      const scriptUrl =
+        'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec';
+
+      const firstResponse = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString(),
+        redirect: 'manual',
+      });
+
+      const redirectUrl = firstResponse.headers.get('location');
+
+      console.log('GOOGLE SHEET FIRST STATUS:', firstResponse.status);
+      console.log('GOOGLE SHEET REDIRECT URL:', redirectUrl);
+
+      let finalResponse;
+
+      if (redirectUrl) {
+        finalResponse = await fetch(redirectUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: params.toString(),
-        }
-      );
+        });
+      } else {
+        finalResponse = firstResponse;
+      }
 
-      const sheetText = await sheetResponse.text();
+      const finalText = await finalResponse.text();
 
-      console.log('GOOGLE SHEET STATUS:', sheetResponse.status);
-      console.log('GOOGLE SHEET RAW RESPONSE:', sheetText);
+      console.log('GOOGLE SHEET FINAL STATUS:', finalResponse.status);
+      console.log('GOOGLE SHEET FINAL URL:', finalResponse.url);
+      console.log('GOOGLE SHEET RAW RESPONSE:', finalText);
     } catch (sheetError) {
       console.error('GOOGLE SHEET ERROR:', sheetError);
     }
 
     return res.status(200).json({
       success: true,
-      message: 'Emails sent successfully and booking saved',
+      message: 'Emails sent successfully and booking processed',
     });
   } catch (error) {
     console.error('SEND-BOOKING ERROR:', error);
