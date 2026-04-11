@@ -24,7 +24,7 @@
         <nav>
             <div class="logo">
                 <a href="../">
-                    <img src="images/kobe-hibachi-logo.png" alt="Kobe Hibachi Catering Logo"
+                    <img src="../images/kobe-hibachi-logo.png" alt="Kobe Hibachi Catering Logo"
                         title="Kobe Hibachi Catering" width="40" height="52" loading="eager">
                     <span class="logo-text">Kobe <span class="accent">Hibachi</span></span>
                 </a>
@@ -119,8 +119,33 @@
                             <input type="text" id="captcha" name="captcha" placeholder="Enter your answer" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Submit Booking Request</button>
                         <input name="url" style="display:none" aria-hidden="true" tabindex="-1" autocomplete="off">
+
+                        <div id="bookingSuccess"
+                            style="display:none; margin-top:20px; padding:20px; border:2px solid #e0e0e0; border-radius:12px; background:#fafafa;">
+                            <h4 style="margin-bottom:12px; color:#111;">Booking Request Received ✅</h4>
+                            <p style="margin-bottom:10px; color:#333;">
+                                Your request has been submitted successfully.
+                            </p>
+                            <p style="margin-bottom:10px; color:#333;">
+                                To secure your date, please send a <strong>$50 deposit</strong> by Zelle.
+                            </p>
+                            <p style="margin-bottom:10px; color:#333;">
+                                <strong>Zelle recipient:</strong> (347) 793-6589
+                            </p>
+                            <p style="margin-bottom:15px; color:#333;">
+                                After sending the deposit, please text a screenshot of payment confirmation.
+                            </p>
+
+                            <img src="../images/Kobe_zelle_QR.png"
+                                alt="Kobe Hibachi Zelle QR Code"
+                                style="max-width:220px; width:100%; height:auto; display:block; margin:0 auto 15px; border-radius:8px;">
+
+                            <p style="font-size:0.95rem; color:#666; margin-bottom:0;">
+                                Your $50 deposit will be applied to your final total.
+                            </p>
+                        </div>
                     </form>
                 </div>
 
@@ -129,15 +154,15 @@
                     <!-- Pricing Info -->
                     <div class="info-card fade-in">
                         <h3>💲 Transparent Pricing</h3>
-                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">Pricing is per
-                            person, per plate. Final pricing may vary based on guest count and event location.</p>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Pricing is per person, per plate. Final pricing may vary based on guest count and event location.
+                        </p>
                         <ul>
                             <li><strong>Adults (2 Proteins):</strong> $50/person</li>
                             <li><strong>Adults (3 Proteins):</strong> $55/person</li>
                             <li><strong>Kids Under 12:</strong> $25/person</li>
                         </ul>
-                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">All packages include:
-                        </p>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">All packages include:</p>
                         <ul>
                             <li>8.875% New York Sales Tax</li>
                             <li>20% Chef Service Gratuity</li>
@@ -148,8 +173,9 @@
                     <!-- Travel Fee -->
                     <div class="info-card fade-in">
                         <h3>🚗 Travel Fee</h3>
-                        <p style="color: var(--text-light); margin-bottom: 10px; font-size: 0.9rem;">Calculated from
-                            Staten Island to event location via Google Maps</p>
+                        <p style="color: var(--text-light); margin-bottom: 10px; font-size: 0.9rem;">
+                            Travel fee is estimated based on distance from 5301 8th Ave, Brooklyn, NY 11220
+                        </p>
                         <table class="travel-table">
                             <thead>
                                 <tr>
@@ -177,7 +203,8 @@
                             </tbody>
                         </table>
                         <p style="margin-top: 15px; font-size: 0.9rem; color: var(--accent-color); font-weight: 600;">
-                            Final total will always be confirmed before deposit is collected.</p>
+                            Final total will always be confirmed before deposit is collected.
+                        </p>
                     </div>
 
                     <!-- Deposit Info -->
@@ -185,10 +212,17 @@
                         <h3>🔒 Secure Your Booking</h3>
                         <ul>
                             <li><strong>$50 deposit</strong> required to secure your date</li>
-                            <li><strong>Accepted:</strong> Zelle / Cash App</li>
+                            <li><strong>Accepted:</strong> Zelle</li>
+                            <li>Zelle to <strong>(347) 793-6589</strong></li>
+                            <li>Scan the QR code after submitting the form</li>
                             <li>Remaining balance due on event day</li>
                             <li>Deposit applied to final total</li>
                         </ul>
+                        <div style="margin-top:15px; text-align:center;">
+                            <img src="../images/Kobe_zelle_QR.png"
+                                alt="Kobe Hibachi Zelle QR Code"
+                                style="max-width:180px; width:100%; height:auto; border-radius:8px;">
+                        </div>
                     </div>
 
                     <!-- Trust Badges -->
@@ -302,6 +336,71 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="../script.js" defer></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("bookingForm");
+            const submitBtn = document.getElementById("submitBtn");
+            const successBox = document.getElementById("bookingSuccess");
+
+            if (!form) return;
+
+            form.addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const captcha = document.getElementById("captcha").value.trim();
+                if (captcha !== "7") {
+                    alert("Spam check answer is incorrect.");
+                    return;
+                }
+
+                const honeypot = form.querySelector('input[name="url"]');
+                if (honeypot && honeypot.value.trim() !== "") {
+                    return;
+                }
+
+                const formData = {
+                    name: document.getElementById("name").value.trim(),
+                    phone: document.getElementById("phone").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    date: document.getElementById("date").value,
+                    guests: document.getElementById("guests").value.trim(),
+                    address: document.getElementById("address").value.trim(),
+                    service: document.getElementById("service").value,
+                    message: document.getElementById("message").value.trim()
+                };
+
+                try {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = "Submitting...";
+
+                    const response = await fetch("/api/send-booking", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(result.error || "Something went wrong.");
+                    }
+
+                    form.reset();
+                    successBox.style.display = "block";
+                    successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+                } catch (error) {
+                    alert(error.message || "Failed to submit booking request.");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Submit Booking Request";
+                }
+            });
+        });
+    </script>
+
     <script defer
         src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516"
         integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg=="
