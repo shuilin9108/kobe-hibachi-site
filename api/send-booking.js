@@ -39,9 +39,6 @@ export default async function handler(req, res) {
 
     const ownerData = await ownerResponse.json();
 
-    console.log('OWNER EMAIL STATUS:', ownerResponse.status);
-    console.log('OWNER EMAIL DATA:', ownerData);
-
     if (!ownerResponse.ok) {
       return res.status(500).json({
         error: ownerData.message || 'Failed to send owner email',
@@ -72,7 +69,7 @@ export default async function handler(req, res) {
         `,
       };
 
-      const customerResponse = await fetch('https://api.resend.com/emails', {
+      await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -80,17 +77,12 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify(customerPayload),
       });
-
-      const customerData = await customerResponse.json();
-
-      console.log('CUSTOMER EMAIL STATUS:', customerResponse.status);
-      console.log('CUSTOMER EMAIL DATA:', customerData);
     }
 
-    // 3. 写入 Google Sheet（改用 GET，避开 Google POST 跳转问题）
+    // 3. 写入 Google Sheet（GET）
     try {
       const sheetUrl = new URL(
-        'https://script.google.com/macros/s/AKfycbxuED6DIZxmwuXsYvyzFavXjXKmBd93UQ2EgEfIUsaq_TxnZeJG4vOimyyQU2YcSBmt/exec'
+        'https://script.google.com/macros/s/AKfycbxuED6DlZxmwuXsYvyzFavXjXKmBd93UQ2EgEflUsaq_TxnZeJG4vOimyvQU2YcSBmt/exec'
       );
 
       sheetUrl.searchParams.set('name', name || '');
