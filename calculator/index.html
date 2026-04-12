@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hibachi Price Calculator | Kobe Hibachi Catering</title>
+    <meta name="description"
+        content="Use our hibachi price calculator to estimate the cost of your private hibachi party. Calculate guest count, package pricing, add-ons, travel fee, and suggested gratuity.">
+    <meta name="keywords"
+        content="hibachi price calculator, hibachi cost, hibachi catering price, private hibachi chef cost, hibachi party estimate">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Hibachi Price Calculator | Kobe Hibachi Catering",
+      "url": "https://www.kobehibachicatering.com/calculator/",
+      "description": "Estimate the cost of your private hibachi party with our instant calculator.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Kobe Hibachi Catering",
+        "url": "https://www.kobehibachicatering.com/"
+      }
+    }
+    </script>
+
+    <style>
+        .calc-wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 10px 0 30px;
+        }
+
+        .calc-intro {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .calc-intro h2 {
+            margin-bottom: 10px;
+        }
+
+        .calc-intro p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .calc-card {
+            background: #fff;
+            border: 1px solid #ececec;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .calc-card-head {
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .calc-card-head h3 {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .calc-card-body {
+            padding: 20px;
+        }
+
+        .calc-section-title {
+            margin: 18px 0 12px;
+            padding-top: 14px;
+            border-top: 1px dashed #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .calc-section-title:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .calc-section-title h4 {
+            margin: 0;
+            font-size: 0.92rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .calc-section-title span {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .calc-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .calc-row {
+            display: grid;
+            grid-template-columns: 1fr 140px;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .calc-label {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .calc-label strong {
+            font-size: 0.96rem;
+            color: var(--text-dark);
+        }
+
+        .calc-label small {
+            color: var(--text-light);
+            line-height: 1.45;
+            font-size: 0.82rem;
+        }
+
+        .calc-input,
+        .calc-select,
+        #quoteText {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            background: #fff;
+        }
+
+        .calc-input:focus,
+        .calc-select:focus,
+        #quoteText:focus {
+            outline: none;
+            border-color: rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .calc-note {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: #fafafa;
+            border: 1px solid #ececec;
+            border-radius: 12px;
+            font-size: 0.84rem;
+            color: var(--text-light);
+            line-height: 1.55;
+        }
+
+        .calc-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .calc-btn {
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 12px;
+            padding: 11px 14px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: 0.15s ease;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .calc-btn-dark {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .calc-summary-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .calc-summary-list li {
+            margin: 8px 0;
+            color: var(--text-dark);
+            line-height: 1.45;
+        }
+
+        .calc-totals {
+            background: linear-gradient(180deg, #111, #1d1d1d);
+            color: #fff;
+            padding: 16px 16px 12px;
+        }
+
+        .calc-total-line,
+        .calc-grand-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 2px;
+            font-size: 0.95rem;
+        }
+
+        .calc-total-line small {
+            opacity: 0.8;
+        }
+
+        .calc-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+            margin: 8px 0;
+        }
+
+        .calc-grand-line {
+            font-weight: 700;
+        }
+
+        .calc-subtle {
+            padding: 14px 20px 0;
+            color: var(--text-light);
+            font-size: 0.84rem;
+            line-height: 1.55;
+        }
+
+        #quoteText {
+            margin-top: 12px;
+            min-height: 220px;
+            resize: vertical;
+            line-height: 1.45;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.84rem;
+        }
+
+        .calc-toast {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            color: #111;
+            font-size: 0.85rem;
+        }
+
+        .calc-toast.show {
+            display: block;
+        }
+
+        .calc-booking-cta {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .calc-booking-cta p {
+            margin-bottom: 14px;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 920px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .calc-row {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-card-body,
+            .calc-card-head {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../">
+                    <img src="../images/kobe-hibachi-logo.png" alt="Kobe Hibachi Catering Logo"
+                        title="Kobe Hibachi Catering" width="40" height="52" loading="eager" />
+                    <span class="logo-text">Kobe <span class="accent">Hibachi</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../menu/">Menu</a></li>
+                <li><a href="../about/">About</a></li>
+                <li><a href="../faq/">FAQ</a></li>
+                <li><a href="../#service-areas">Locations</a></li>
+                <li><a href="../blog/">Blog</a></li>
+                <li><a href="../booking/" class="btn-nav">Book Now</a></li>
+            </ul>
+            <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Hibachi Price Calculator</h1>
+            <p>Estimate your party total in seconds, then book your date online.</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="calc-wrap">
+
+                <div class="calc-intro fade-in">
+                    <h2>Instant Estimate</h2>
+                    <p>
+                        Enter your guest count, package, upgrades, extras, and travel distance.
+                        This gives you a quick estimate before booking. Final pricing is confirmed after your date,
+                        address, and order details are reviewed.
+                    </p>
+                </div>
+
+                <div class="calc-grid">
+
+                    <!-- Left -->
+                    <section class="calc-card fade-in" aria-label="Estimator inputs">
+                        <div class="calc-card-head">
+                            <h3>Build Your Estimate</h3>
+                        </div>
+
+                        <div class="calc-card-body">
+
+                            <div class="calc-section-title">
+                                <h4>Guest Count</h4>
+                                <span>base pricing</span>
+                            </div>
+
+                            <div class="calc-rows">
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Adults</strong>
+                                        <small>Adults are priced by package below.</small>
+                                    </div>
+                                    <input id="adults" class="calc-input" type="number" min="0" step="1" value="10">
+                                </div>
+
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Kids</strong>
+                                        <small>$30 each</small>
+                                    </div>
+                                    <input id="kids" class="calc-input" type="number" min="0" step="1" value="2">
+                                </div>
+                            </div>
+
+                            <div class="calc-section-title">
+                                <h4>Adult Package</h4>
+                                <span>choose one</span>
+                            </div>
+
+                            <div class="calc-rows">
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Package Type</strong>
+                                        <small>2-Protein = $50 / 3-Protein = $60</small>
+                                    </div>
+                                    <select id="adultPackage" class="calc-select">
+                                        <option value="50">2-Protein Package — $50 per adult</option>
+                                        <option value="60">3-Protein Package — $60 per adult</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="calc-section-title">
+                                <h4>Premium Upgrades</h4>
+                                <span>optional</span>
+                            </div>
+
+                            <div class="calc-rows">
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Filet Mignon Upgrades</strong>
+                                        <small>+$5 each</small>
+                                    </div>
+                                    <input id="filet" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Lobster Upgrades</strong>
+                                        <small>+$10 each</small>
+                                    </div>
+                                    <input id="lobster" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+                            </div>
+
+                            <div class="calc-note">
+                                Standard proteins are included with the selected package.
+                                Filet Mignon and Lobster are premium add-ons.
+                            </div>
+
+                            <div class="calc-section-title">
+                                <h4>Extras</h4>
+                                <span>optional add-ons</span>
+                            </div>
+
+                            <div class="calc-rows">
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Extra Regular Protein</strong>
+                                        <small>$10 each</small>
+                                    </div>
+                                    <input id="extraRegularProtein" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Extra Premium Protein</strong>
+                                        <small>$15 each</small>
+                                    </div>
+                                    <input id="extraPremiumProtein" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Noodles / Extra Fried Rice</strong>
+                                        <small>$5 each</small>
+                                    </div>
+                                    <input id="noodlesRice" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Edamame</strong>
+                                        <small>$5 each</small>
+                                    </div>
+                                    <input id="edamame" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Gyoza</strong>
+                                        <small>$8 each order</small>
+                                    </div>
+                                    <input id="gyoza" class="calc-input" type="number" min="0" step="1" value="0">
+                                </div>
+                            </div>
+
+                            <div class="calc-section-title">
+                                <h4>Travel Fee</h4>
+                                <span>auto-calculated</span>
+                            </div>
+
+                            <div class="calc-rows">
+                                <div class="calc-row">
+                                    <div class="calc-label">
+                                        <strong>Total Miles From Brooklyn</strong>
+                                        <small>30 miles or less is free. Over 30 miles is $1 per extra mile.</small>
+                                    </div>
+                                    <input id="miles" class="calc-input" type="number" min="0" step="1" value="20">
+                                </div>
+                            </div>
+
+                            <div class="calc-note">
+                                Minimum food total is <strong>$500</strong> before travel and gratuity.
+                            </div>
+
+                            <div class="calc-buttons">
+                                <button class="calc-btn" id="resetBtn" type="button">Reset</button>
+                                <button class="calc-btn calc-btn-dark" id="copyBtn" type="button">Copy Quote</button>
+                            </div>
+
+                            <div class="calc-toast" id="toast">Copied!</div>
+                        </div>
+                    </section>
+
+                    <!-- Right -->
+                    <aside class="calc-card fade-in" aria-label="Estimate summary">
+                        <div class="calc-card-head">
+                            <h3>Estimate Summary</h3>
+                        </div>
+
+                        <div class="calc-card-body">
+                            <ul class="calc-summary-list" id="summaryList"></ul>
+                        </div>
+
+                        <div class="calc-totals">
+                            <div class="calc-total-line">
+                                <span>Food <small>(before minimum)</small></span>
+                                <span id="foodBeforeMin">$0.00</span>
+                            </div>
+
+                            <div class="calc-total-line">
+                                <span>Food Total</span>
+                                <span id="foodTotal">$0.00</span>
+                            </div>
+
+                            <div class="calc-total-line">
+                                <span>Travel Fee</span>
+                                <span id="travelFee">$0.00</span>
+                            </div>
+
+                            <div class="calc-divider"></div>
+
+                            <div class="calc-total-line">
+                                <span>20% Tip</span>
+                                <span id="tip20">$0.00</span>
+                            </div>
+
+                            <div class="calc-total-line">
+                                <span>25% Tip</span>
+                                <span id="tip25">$0.00</span>
+                            </div>
+
+                            <div class="calc-total-line">
+                                <span>30% Tip</span>
+                                <span id="tip30">$0.00</span>
+                            </div>
+
+                            <div class="calc-divider"></div>
+
+                            <div class="calc-grand-line">
+                                <span>Grand Total (20%)</span>
+                                <span id="grand20">$0.00</span>
+                            </div>
+
+                            <div class="calc-grand-line">
+                                <span>Grand Total (25%)</span>
+                                <span id="grand25">$0.00</span>
+                            </div>
+
+                            <div class="calc-grand-line">
+                                <span>Grand Total (30%)</span>
+                                <span id="grand30">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="calc-subtle">
+                            This is a quick estimate for planning. Final pricing depends on your exact order, address,
+                            and confirmation details.
+                            <textarea id="quoteText" readonly aria-label="Copyable quote"></textarea>
+                        </div>
+                    </aside>
+
+                </div>
+
+                <div class="calc-booking-cta fade-in">
+                    <p>Ready to lock in your date?</p>
+                    <a href="../booking/" class="btn btn-primary">Book Now</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h3>Kobe Hibachi Catering</h3>
+                    <p>New York's premier private hibachi chef experience. We bring the fire, flavor, and unforgettable
+                        entertainment to your backyard parties, birthdays, graduations, and corporate events.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/kobehibachicatering/" target="_blank" rel="noopener"
+                            aria-label="Follow Kobe Hibachi Catering on Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/@kobehibachicatering" target="_blank" rel="noopener"
+                            aria-label="Watch Kobe Hibachi Catering on YouTube">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="../">Home</a></p>
+                    <p><a href="../menu/">Menu</a></p>
+                    <p><a href="../about/">About Us</a></p>
+                    <p><a href="../faq/">FAQ</a></p>
+                    <p><a href="../blog/">Blog</a></p>
+                    <p><a href="../booking/">Book Now</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Service Areas</h3>
+                    <p><a href="../hibachi-catering-staten-island/">Staten Island</a></p>
+                    <p><a href="../hibachi-catering-brooklyn/">Brooklyn</a></p>
+                    <p><a href="../hibachi-catering-queens/">Queens</a></p>
+                    <p><a href="../hibachi-catering-manhattan/">Manhattan</a></p>
+                    <p><a href="../hibachi-catering-long-island/">Long Island</a></p>
+                    <p><a href="../hibachi-catering-jersey-city/">Jersey City</a></p>
+                    <p><a href="../hibachi-catering-hoboken/">Hoboken</a></p>
+                    <p><a href="../hibachi-catering-north-nj/">North NJ</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="footer-contact-item">
+                        <span class="icon">📞</span>
+                        <a href="tel:+13477936589">(347) 793-6589</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="icon">✉️</span>
+                        <a href="mailto:kobehibachicatering@gmail.com">kobehibachicatering@gmail.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="icon">📸</span>
+                        <a href="https://www.instagram.com/kobehibachicatering/" target="_blank"
+                            rel="noopener">@kobehibachicatering</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kobe Hibachi Catering. All Rights Reserved.</p>
+                <p class="footer-partner">
+                    Website powered by
+                    <a href="https://shuilink.com" class="footer-shuilink-link" target="_blank"
+                        rel="noopener">ShuiLink</a>
+                    <br>
+                    Websites & booking systems for small businesses
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Book Now (Mobile) -->
+    <div class="sticky-book">
+        <a href="../booking/" class="btn btn-primary">Book Now</a>
+    </div>
+
+    <script src="../script.js" defer></script>
+
+    <script>
+        const PRICES = {
+            kid: 30,
+            filetUpcharge: 5,
+            lobsterUpcharge: 10,
+            extraRegularProtein: 10,
+            extraPremiumProtein: 15,
+            noodlesRice: 5,
+            edamame: 5,
+            gyoza: 8,
+            minFoodTotal: 500,
+            freeMiles: 30,
+            travelPerMile: 1
+        };
+
+        const els = {
+            adults: document.getElementById('adults'),
+            kids: document.getElementById('kids'),
+            adultPackage: document.getElementById('adultPackage'),
+            filet: document.getElementById('filet'),
+            lobster: document.getElementById('lobster'),
+            extraRegularProtein: document.getElementById('extraRegularProtein'),
+            extraPremiumProtein: document.getElementById('extraPremiumProtein'),
+            noodlesRice: document.getElementById('noodlesRice'),
+            edamame: document.getElementById('edamame'),
+            gyoza: document.getElementById('gyoza'),
+            miles: document.getElementById('miles'),
+            summaryList: document.getElementById('summaryList'),
+            foodBeforeMin: document.getElementById('foodBeforeMin'),
+            foodTotal: document.getElementById('foodTotal'),
+            travelFee: document.getElementById('travelFee'),
+            tip20: document.getElementById('tip20'),
+            tip25: document.getElementById('tip25'),
+            tip30: document.getElementById('tip30'),
+            grand20: document.getElementById('grand20'),
+            grand25: document.getElementById('grand25'),
+            grand30: document.getElementById('grand30'),
+            quoteText: document.getElementById('quoteText'),
+            resetBtn: document.getElementById('resetBtn'),
+            copyBtn: document.getElementById('copyBtn'),
+            toast: document.getElementById('toast')
+        };
+
+        function n(v) {
+            const num = Number(v);
+            return Number.isFinite(num) && num > 0 ? num : 0;
+        }
+
+        function money(x) {
+            return x.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
+        }
+
+        function buildSummaryLine(text) {
+            const li = document.createElement('li');
+            li.textContent = text;
+            return li;
+        }
+
+        function calcTravelFee(totalMiles) {
+            if (totalMiles <= PRICES.freeMiles) return 0;
+            return (totalMiles - PRICES.freeMiles) * PRICES.travelPerMile;
+        }
+
+        function calc() {
+            const adults = n(els.adults.value);
+            const kids = n(els.kids.value);
+            const adultPackagePrice = n(els.adultPackage.value);
+            const filet = n(els.filet.value);
+            const lobster = n(els.lobster.value);
+            const extraRegularProtein = n(els.extraRegularProtein.value);
+            const extraPremiumProtein = n(els.extraPremiumProtein.value);
+            const noodlesRice = n(els.noodlesRice.value);
+            const edamame = n(els.edamame.value);
+            const gyoza = n(els.gyoza.value);
+            const miles = n(els.miles.value);
+
+            const baseAdults = adults * adultPackagePrice;
+            const baseKids = kids * PRICES.kid;
+
+            const premium = (filet * PRICES.filetUpcharge) + (lobster * PRICES.lobsterUpcharge);
+
+            const extras =
+                (extraRegularProtein * PRICES.extraRegularProtein) +
+                (extraPremiumProtein * PRICES.extraPremiumProtein) +
+                (noodlesRice * PRICES.noodlesRice) +
+                (edamame * PRICES.edamame) +
+                (gyoza * PRICES.gyoza);
+
+            const baseGuests = baseAdults + baseKids;
+            const baseWithMinimum = Math.max(baseGuests, PRICES.minFoodTotal);
+            const addOns = premium + extras;
+
+            const foodBeforeMin = baseGuests + addOns;
+            const foodTotal = baseWithMinimum + addOns;
+
+            const travel = calcTravelFee(miles);
+            const subtotal = foodTotal + travel;
+
+            const tip20 = subtotal * 0.20;
+            const tip25 = subtotal * 0.25;
+            const tip30 = subtotal * 0.30;
+
+            const grand20 = subtotal + tip20;
+            const grand25 = subtotal + tip25;
+            const grand30 = subtotal + tip30;
+
+            els.summaryList.innerHTML = '';
+
+            if (adults) {
+                const packageLabel = adultPackagePrice === 50 ? '2-Protein' : '3-Protein';
+                els.summaryList.appendChild(buildSummaryLine(`${adults} Adults — ${packageLabel} @ $${adultPackagePrice}`));
+            }
+
+            if (kids) {
+                els.summaryList.appendChild(buildSummaryLine(`${kids} Kids @ $${PRICES.kid}`));
+            }
+
+            if (filet) {
+                els.summaryList.appendChild(buildSummaryLine(`Filet upgrades: ${filet} (+$${PRICES.filetUpcharge} each)`));
+            }
+
+            if (lobster) {
+                els.summaryList.appendChild(buildSummaryLine(`Lobster upgrades: ${lobster} (+$${PRICES.lobsterUpcharge} each)`));
+            }
+
+            if (extraRegularProtein) {
+                els.summaryList.appendChild(buildSummaryLine(`Extra regular protein: ${extraRegularProtein} @ $${PRICES.extraRegularProtein}`));
+            }
+
+            if (extraPremiumProtein) {
+                els.summaryList.appendChild(buildSummaryLine(`Extra premium protein: ${extraPremiumProtein} @ $${PRICES.extraPremiumProtein}`));
+            }
+
+            if (noodlesRice) {
+                els.summaryList.appendChild(buildSummaryLine(`Noodles / fried rice extras: ${noodlesRice} @ $${PRICES.noodlesRice}`));
+            }
+
+            if (edamame) {
+                els.summaryList.appendChild(buildSummaryLine(`Edamame: ${edamame} @ $${PRICES.edamame}`));
+            }
+
+            if (gyoza) {
+                els.summaryList.appendChild(buildSummaryLine(`Gyoza: ${gyoza} @ $${PRICES.gyoza}`));
+            }
+
+            els.summaryList.appendChild(buildSummaryLine(`Travel distance entered: ${miles} miles`));
+
+            if (!els.summaryList.children.length) {
+                els.summaryList.appendChild(buildSummaryLine('Enter your details to see an estimate.'));
+            }
+
+            els.foodBeforeMin.textContent = money(foodBeforeMin);
+            els.foodTotal.textContent = money(foodTotal);
+            els.travelFee.textContent = money(travel);
+            els.tip20.textContent = money(tip20);
+            els.tip25.textContent = money(tip25);
+            els.tip30.textContent = money(tip30);
+            els.grand20.textContent = money(grand20);
+            els.grand25.textContent = money(grand25);
+            els.grand30.textContent = money(grand30);
+
+            const minApplied = baseGuests < PRICES.minFoodTotal;
+            const packageText = adultPackagePrice === 50 ? '2-Protein Package' : '3-Protein Package';
+
+            const quote =
+`Kobe Hibachi Catering — Estimate
+
+Adults: ${adults} (${packageText} @ $${adultPackagePrice})
+Kids: ${kids} @ $${PRICES.kid}
+
+Upgrades:
+- Filet Mignon: ${filet} (+$${PRICES.filetUpcharge})
+- Lobster: ${lobster} (+$${PRICES.lobsterUpcharge})
+
+Extras:
+- Extra Regular Protein: ${extraRegularProtein} @ $${PRICES.extraRegularProtein}
+- Extra Premium Protein: ${extraPremiumProtein} @ $${PRICES.extraPremiumProtein}
+- Noodles / Fried Rice: ${noodlesRice} @ $${PRICES.noodlesRice}
+- Edamame: ${edamame} @ $${PRICES.edamame}
+- Gyoza: ${gyoza} @ $${PRICES.gyoza}
+
+Travel:
+- Total miles entered: ${miles}
+- Travel fee: ${money(travel)}
+
+Calculation:
+- Adults: ${adults} × $${adultPackagePrice} = ${money(baseAdults)}
+- Kids: ${kids} × $${PRICES.kid} = ${money(baseKids)}
+- Base guest total: ${money(baseGuests)}
+${minApplied ? `- Minimum food total applied: ${money(PRICES.minFoodTotal)}\n` : ''}- Add-ons total: ${money(addOns)}
+- Food total: ${money(foodTotal)}
+- Subtotal (food + travel): ${money(subtotal)}
+
+Suggested gratuity:
+- 20%: ${money(tip20)} → Grand Total: ${money(grand20)}
+- 25%: ${money(tip25)} → Grand Total: ${money(grand25)}
+- 30%: ${money(tip30)} → Grand Total: ${money(grand30)}
+
+Phone: (347) 793-6589
+`;
+
+            els.quoteText.value = quote;
+        }
+
+        function bind() {
+            const inputs = [
+                els.adults,
+                els.kids,
+                els.adultPackage,
+                els.filet,
+                els.lobster,
+                els.extraRegularProtein,
+                els.extraPremiumProtein,
+                els.noodlesRice,
+                els.edamame,
+                els.gyoza,
+                els.miles
+            ];
+
+            inputs.forEach(i => i.addEventListener('input', calc));
+            inputs.forEach(i => i.addEventListener('change', calc));
+
+            els.resetBtn.addEventListener('click', () => {
+                els.adults.value = 10;
+                els.kids.value = 2;
+                els.adultPackage.value = 50;
+                els.filet.value = 0;
+                els.lobster.value = 0;
+                els.extraRegularProtein.value = 0;
+                els.extraPremiumProtein.value = 0;
+                els.noodlesRice.value = 0;
+                els.edamame.value = 0;
+                els.gyoza.value = 0;
+                els.miles.value = 20;
+                calc();
+            });
+
+            els.copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(els.quoteText.value);
+                    els.toast.classList.add('show');
+                    setTimeout(() => els.toast.classList.remove('show'), 1200);
+                } catch (e) {
+                    els.quoteText.focus();
+                    els.quoteText.select();
+                    document.execCommand('copy');
+                    els.toast.classList.add('show');
+                    setTimeout(() => els.toast.classList.remove('show'), 1200);
+                }
+            });
+        }
+
+        bind();
+        calc();
+    </script>
+</body>
+
+</html>
