@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- 首页 -->
+  <!-- Homepage -->
   <url>
     <loc>https://www.kobehibachicatering.com/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- 核心页面 -->
+  <!-- Core Pages -->
   <url>
     <loc>https://www.kobehibachicatering.com/booking/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/menu/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/about/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.60</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/faq/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.65</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/blog/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
   </url>
 
-  <!-- 城市页 -->
+  <!-- City Pages -->
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-staten-island/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-brooklyn/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-queens/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-manhattan/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-long-island/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-jersey-city/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-hoboken/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.kobehibachicatering.com/hibachi-catering-north-nj/</loc>
-    <lastmod>2026-04-11</lastmod>
+    <lastmod>2026-04-11T12:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
 </urlset>
