@@ -171,11 +171,21 @@ document.addEventListener('DOMContentLoaded', function () {
     );
 
     bookingButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (e) {
             if (typeof gtag === 'function') {
+                e.preventDefault(); // 阻止立即跳转
+
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
+                    'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD',
+                    'event_callback': function () {
+                        window.location = btn.href;
+                    }
                 });
+
+                // fallback（防止 callback 没执行）
+                setTimeout(function () {
+                    window.location = btn.href;
+                }, 500);
             }
         });
     });
