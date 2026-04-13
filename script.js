@@ -165,4 +165,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    /* ---- Booking CTA Conversion Tracking ---- */
+    const bookingButtons = document.querySelectorAll(
+        '#continue-booking-btn, #mobile-booking-btn'
+    );
+
+    bookingButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
+                });
+            }
+        });
+    });
+
 });
