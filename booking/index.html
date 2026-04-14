@@ -672,9 +672,8 @@
 
                 bookingBtn.addEventListener('click', function () {
                     if (typeof gtag === 'function') {
-                        gtag('event', 'booking_cta_click', {
-                            event_category: 'booking',
-                            event_label: 'acuity_redirect_desktop'
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
                         });
                     }
                 });
@@ -683,9 +682,8 @@
             if (mobileBookingBtn) {
                 mobileBookingBtn.addEventListener('click', function () {
                     if (typeof gtag === 'function') {
-                        gtag('event', 'booking_cta_click', {
-                            event_category: 'booking',
-                            event_label: 'acuity_redirect_mobile'
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
                         });
                     }
                 });
