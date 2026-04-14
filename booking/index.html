@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Private Hibachi Chef | Hibachi Party Booking NYC | Kobe Hibachi</title>
@@ -21,15 +20,15 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18087654321"></script>
+    <!-- Google tag (GA4 + Google Ads) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XE2J1LCPZ1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'AW-18087654321');
         gtag('config', 'G-XE2J1LCPZ1');
+        gtag('config', 'AW-18087654321');
     </script>
 
     <script type="application/ld+json">
@@ -321,7 +320,6 @@
 
 <body>
 
-    <!-- Header -->
     <header>
         <nav>
             <div class="logo">
@@ -348,7 +346,6 @@
         </nav>
     </header>
 
-    <!-- Page Hero -->
     <section class="page-hero">
         <div class="container">
             <h1>Book Your Private Hibachi Chef Today</h1>
@@ -357,7 +354,6 @@
         </div>
     </section>
 
-    <!-- Booking Section -->
     <section class="booking-section">
         <div class="container" style="max-width: 1200px;">
 
@@ -370,7 +366,6 @@
 
             <div class="booking-layout">
 
-                <!-- LEFT COLUMN -->
                 <div class="booking-main-column">
 
                     <div class="section-header fade-in" style="margin-bottom: 30px;">
@@ -379,7 +374,6 @@
                         <p>$50 deposit required • $500 minimum per event</p>
                     </div>
 
-                    <!-- Acuity Redirect Booking -->
                     <div class="fade-in"
                         style="background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 42px 28px; text-align: center;">
 
@@ -446,8 +440,11 @@
                             justify-content:center;
                             align-items:center;
                             margin-bottom: 18px;">
-                            <a href="https://app.acuityscheduling.com/schedule.php?owner=38994792" target="_blank"
-                                rel="noopener" id="continue-booking-btn" style="
+                            <a href="https://app.acuityscheduling.com/schedule.php?owner=38994792"
+                                target="_blank"
+                                rel="noopener"
+                                id="continue-booking-btn"
+                                style="
                                display: inline-flex;
                                align-items: center;
                                justify-content: center;
@@ -497,7 +494,6 @@
                         </a>
                     </div>
 
-                    <!-- Travel Fee -->
                     <div class="info-card fade-in" style="margin-top: 30px;">
                         <h3>🚗 Travel Fee</h3>
                         <p style="color: var(--text-light); margin-bottom: 12px; font-size: 0.95rem;">
@@ -522,7 +518,6 @@
 
                 </div>
 
-                <!-- RIGHT COLUMN -->
                 <aside class="booking-side-column fade-in">
                     <div class="booking-offer-card">
                         <div class="booking-offer-inner">
@@ -573,7 +568,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -648,10 +642,12 @@
         </div>
     </footer>
 
-    <!-- Sticky Book Now (Mobile) -->
     <div class="sticky-book">
-        <a href="https://app.acuityscheduling.com/schedule.php?owner=38994792" target="_blank" rel="noopener"
-            class="btn btn-primary" id="mobile-booking-btn">
+        <a href="https://app.acuityscheduling.com/schedule.php?owner=38994792"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+            id="mobile-booking-btn">
             Book Online Now
         </a>
     </div>
@@ -659,9 +655,37 @@
     <script src="../script.js" defer></script>
 
     <script>
+        function trackBookingStart(label) {
+            if (typeof gtag !== 'function') return;
+
+            gtag('event', 'booking_click', {
+                event_category: 'booking',
+                event_label: label
+            });
+
+            gtag('event', 'generate_lead', {
+                currency: 'USD',
+                value: 50
+            });
+
+            gtag('event', 'conversion', {
+                send_to: 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
+            });
+        }
+
+        function trackPhoneClick(label) {
+            if (typeof gtag !== 'function') return;
+
+            gtag('event', 'phone_click', {
+                event_category: 'contact',
+                event_label: label
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const bookingBtn = document.getElementById('continue-booking-btn');
             const mobileBookingBtn = document.getElementById('mobile-booking-btn');
+            const callButtons = document.querySelectorAll('a[href^="tel:"]');
 
             if (bookingBtn) {
                 bookingBtn.addEventListener('mouseenter', function () {
@@ -675,23 +699,22 @@
                 });
 
                 bookingBtn.addEventListener('click', function () {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'conversion', {
-                            'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
-                        });
-                    }
+                    trackBookingStart('main_booking_button');
                 });
             }
 
             if (mobileBookingBtn) {
                 mobileBookingBtn.addEventListener('click', function () {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'conversion', {
-                            'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
-                        });
-                    }
+                    trackBookingStart('mobile_booking_button');
                 });
             }
+
+            callButtons.forEach(function (btn, index) {
+                btn.addEventListener('click', function () {
+                    const label = btn.id ? btn.id : `phone_button_${index + 1}`;
+                    trackPhoneClick(label);
+                });
+            });
         });
     </script>
 </body>
