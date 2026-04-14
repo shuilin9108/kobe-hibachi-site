@@ -163,9 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.parentNode.replaceChild(iframe, this);
             }
         });
-    });     
-
-
-
+    });
 
 });
