@@ -37,12 +37,10 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Favicon / small tab icon fix -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <!-- Google Ads + GA4 Global Site Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XE2J1LCPZ1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -53,7 +51,6 @@
         gtag('config', 'AW-18087654321');
     </script>
 
-    <!-- Small page-only styles for promo code / visibility -->
     <style>
         :root {
             --promo-red: #c91515;
@@ -61,6 +58,8 @@
             --promo-yellow: #ffd54a;
             --promo-white: #ffffff;
             --promo-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            --call-green: #18a34a;
+            --call-green-dark: #117236;
         }
 
         .top-promo-bar {
@@ -180,6 +179,54 @@
 
         .hero-buttons {
             margin-top: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .btn-call-hero {
+            background: linear-gradient(90deg, var(--call-green), var(--call-green-dark));
+            color: #fff !important;
+            box-shadow: 0 10px 24px rgba(24, 163, 74, 0.28);
+        }
+
+        .btn-call-hero:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(24, 163, 74, 0.34);
+        }
+
+        .hero-trust-row {
+            max-width: 940px;
+            margin: 18px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .hero-trust-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            padding: 14px 16px;
+            backdrop-filter: blur(4px);
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+        }
+
+        .hero-trust-card strong {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .hero-trust-card span {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.5;
         }
 
         .cta-promo {
@@ -210,6 +257,110 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        .quick-help-section {
+            padding: 34px 0;
+            background: #fff;
+        }
+
+        .quick-help-card {
+            max-width: 960px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #111, #1f1f1f);
+            border-radius: 20px;
+            padding: 28px 24px;
+            color: #fff;
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16);
+            text-align: center;
+        }
+
+        .quick-help-card .label {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .quick-help-card h2 {
+            margin: 0 0 10px;
+            color: #fff;
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+        .quick-help-card p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 720px;
+            margin: 0 auto 18px;
+            line-height: 1.75;
+        }
+
+        .quick-help-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .quick-help-note {
+            margin-top: 14px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .sticky-call-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: linear-gradient(90deg, #111, #1d1d1d);
+            color: #fff;
+            border-bottom: 2px solid #f97316;
+            transform: translateY(-100%);
+            transition: transform 0.25s ease;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .sticky-call-bar.show {
+            transform: translateY(0);
+        }
+
+        .sticky-call-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .sticky-call-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .sticky-call-copy strong {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .sticky-call-copy span {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .sticky-call-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sticky-call-actions .btn {
+            min-width: 180px;
+        }
+
         .sticky-book .btn {
             display: flex;
             flex-direction: column;
@@ -222,6 +373,28 @@
             font-size: 11px;
             opacity: 0.95;
             font-weight: 700;
+        }
+
+        .hero-buttons .btn,
+        .quick-help-actions .btn,
+        .sticky-call-actions .btn,
+        .cta-section .btn {
+            text-decoration: none;
+        }
+
+        @media (max-width: 900px) {
+            .hero-trust-row {
+                grid-template-columns: 1fr;
+            }
+
+            .sticky-call-inner {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sticky-call-actions .btn {
+                min-width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -245,6 +418,18 @@
             .promo-code-box {
                 width: 100%;
                 font-size: 22px;
+            }
+
+            .sticky-call-bar {
+                top: auto;
+                bottom: 0;
+                border-bottom: 0;
+                border-top: 2px solid #f97316;
+                transform: translateY(100%);
+            }
+
+            .sticky-call-bar.show {
+                transform: translateY(0);
             }
         }
     </style>
@@ -322,19 +507,29 @@
 
 <body>
 
-    <!-- Top Promo Bar -->
+    <div class="sticky-call-bar" id="stickyCallBar">
+        <div class="sticky-call-inner">
+            <div class="sticky-call-copy">
+                <strong>Call Now To Book Your Hibachi Party</strong>
+                <span>Popular weekend dates fill fast. Ask about $50 off with code WELCOME50.</span>
+            </div>
+            <div class="sticky-call-actions">
+                <a href="tel:+13477936589" class="btn btn-primary btn-call-hero">Call (347) 793-6589</a>
+                <a href="./booking/" class="btn btn-secondary">Book Online</a>
+            </div>
+        </div>
+    </div>
+
     <div class="top-promo-bar">
-        <a href="./booking/">
+        <a href="tel:+13477936589">
             <div class="top-promo-inner">
-                🔥 Limited-Time Hibachi Deal: <strong>$50 OFF</strong> Your Backyard Hibachi Party — Use Code
-                <strong>WELCOME50</strong>
-                <span class="top-promo-sub">Book your private hibachi chef at home today. One coupon per event. Cannot
-                    be combined.</span>
+                🔥 Call Now To Book Your Hibachi Party: <strong>(347) 793-6589</strong> — Get <strong>$50 OFF</strong>
+                with code <strong>WELCOME50</strong>
+                <span class="top-promo-sub">Popular weekend dates fill fast. Call or book online today.</span>
             </div>
         </a>
     </div>
 
-    <!-- Header -->
     <header>
         <nav>
             <div class="logo">
@@ -362,7 +557,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline preload="auto">
             <source src="images/mian-page-video.mp4" type="video/mp4">
@@ -373,12 +567,12 @@
             <div class="hero-badge">New York's Premier Hibachi Experience</div>
             <h1>Hibachi Party at Home <span class="fire-text">in New York</span></h1>
             <p>Bring the fire, flavor, and fun to your backyard with a private hibachi chef at home. Perfect for
-                birthdays,
-                graduations, corporate events, and private gatherings across NYC, Staten Island, Brooklyn, Queens, Long
-                Island,
-                and North NJ.</p>
+                birthdays, graduations, corporate events, and private gatherings across NYC, Staten Island, Brooklyn,
+                Queens, Long
+                Island, and North NJ. We also travel to nearby areas within about 3 hours of New York for private
+                hibachi parties
+                and special events.</p>
 
-            <!-- Most visible promo code block -->
             <div class="hero-promo-card">
                 <div class="hero-promo-top">Limited-Time Hibachi Deal</div>
                 <h3>Book Today & Save $50 On Your Hibachi Party</h3>
@@ -393,18 +587,51 @@
                 </div>
 
                 <span class="promo-note">
-                    One coupon per event. Cannot be combined with other offers. Limited-time promotion.
+                    One coupon per event. Cannot be combined with other offers. Popular weekend dates fill fast.
                 </span>
             </div>
 
             <div class="hero-buttons">
-                <a href="./booking/" class="btn btn-primary btn-lg">Book Your Hibachi Party Now</a>
-                <a href="tel:+13477936589" class="btn btn-secondary btn-lg">Call (347) 793-6589</a>
+                <a href="tel:+13477936589" class="btn btn-primary btn-lg btn-call-hero">Call (347) 793-6589 Now</a>
+                <a href="./booking/" class="btn btn-secondary btn-lg">Book Online In Minutes</a>
+            </div>
+
+            <div class="hero-trust-row">
+                <div class="hero-trust-card">
+                    <strong>Call Or Text Directly</strong>
+                    <span>Questions before booking? Reach us now at (347) 793-6589.</span>
+                </div>
+                <div class="hero-trust-card">
+                    <strong>Popular Weekend Dates Fill Fast</strong>
+                    <span>Reserve early for birthdays, graduations, and backyard parties.</span>
+                </div>
+                <div class="hero-trust-card">
+                    <strong>Serving NYC & Nearby Areas</strong>
+                    <span>Private hibachi chef at home for parties across NYC and nearby areas within about 3 hours of
+                        New York.</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
+    <section class="quick-help-section">
+        <div class="container">
+            <div class="quick-help-card fade-in">
+                <span class="label">Need Help Fast?</span>
+                <h2>Call Now To Book Your Date</h2>
+                <p>If you have a birthday, graduation, backyard party, or family gathering coming up, call us now and we
+                    can
+                    help you check availability before popular dates fill up.</p>
+                <div class="quick-help-actions">
+                    <a href="tel:+13477936589" class="btn btn-primary btn-lg btn-call-hero">Call (347) 793-6589</a>
+                    <a href="./booking/" class="btn btn-secondary btn-lg">Book Online</a>
+                </div>
+                <div class="quick-help-note">Fastest way to book: call or text us directly before finishing your online
+                    reservation.</div>
+            </div>
+        </div>
+    </section>
+
     <section class="section-gray" id="how-it-works">
         <div class="container">
             <div class="section-header fade-in">
@@ -417,7 +644,7 @@
                     <div class="step-number">1</div>
                     <h3>Choose Your Date</h3>
                     <p>Pick a date that works for your celebration. Our calendar fills quickly for weekends and
-                        holidays, so book early!</p>
+                        holidays, so book early.</p>
                 </div>
                 <div class="step-card fade-in">
                     <div class="step-number">2</div>
@@ -429,13 +656,12 @@
                     <div class="step-number">3</div>
                     <h3>Enjoy the Experience</h3>
                     <p>Sit back and watch the fire, tricks, and flavors come to life. Your guests will be talking about
-                        this party for years!</p>
+                        this party for years.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Experience -->
     <section id="videos">
         <div class="container">
             <div class="section-header fade-in">
@@ -465,7 +691,6 @@
         </div>
     </section>
 
-    <!-- Menu Preview -->
     <section class="section-gray" id="menu-preview">
         <div class="container">
             <div class="section-header fade-in">
@@ -510,7 +735,6 @@
         </div>
     </section>
 
-    <!-- Service Areas -->
     <section class="section-dark" id="service-areas">
         <div class="container">
             <div class="section-header fade-in">
@@ -563,7 +787,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section id="testimonials">
         <div class="container">
             <div class="section-header fade-in">
@@ -636,7 +859,6 @@
         </div>
     </section>
 
-    <!-- Event Gallery -->
     <section class="section-gray" id="gallery">
         <div class="container">
             <div class="section-header fade-in">
@@ -694,7 +916,6 @@
         </div>
     </section>
 
-    <!-- SEO Content Section -->
     <section>
         <div class="container">
             <div class="section-header fade-in">
@@ -731,19 +952,19 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-promo">
             <strong>Limited-Time Hibachi Deal:</strong> Use promo code <span class="cta-promo-code">WELCOME50</span> for
             $50 off your private hibachi chef at home experience. One coupon per event. Cannot be combined.
         </div>
         <h2>Ready to Book Your<br>Hibachi Party?</h2>
-        <p>Limited availability for weekends and holidays. Secure your date today and bring the ultimate hibachi
-            experience to your backyard.</p>
-        <a href="./booking/" class="btn btn-primary btn-lg">Book Now</a>
+        <p>Popular weekend dates fill fast. Call now or reserve online to secure your event date.</p>
+        <div class="hero-buttons">
+            <a href="tel:+13477936589" class="btn btn-primary btn-lg btn-call-hero">Call (347) 793-6589</a>
+            <a href="./booking/" class="btn btn-secondary btn-lg">Book Online</a>
+        </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -819,13 +1040,22 @@
         </div>
     </footer>
 
-    <!-- Sticky Book Now (Mobile) -->
     <div class="sticky-book">
-        <a href="./booking/" class="btn btn-primary">
-            Book Your Hibachi Party Now
-            <small>Use code WELCOME50 for $50 off your hibachi booking</small>
-        </a>
+        <a href="tel:+13477936589" class="btn btn-primary">Call Now</a>
+        <a href="./booking/" class="btn btn-secondary sticky-call">Book Online</a>
     </div>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            const stickyBar = document.getElementById('stickyCallBar');
+            if (!stickyBar) return;
+            if (window.scrollY > 220) {
+                stickyBar.classList.add('show');
+            } else {
+                stickyBar.classList.remove('show');
+            }
+        });
+    </script>
 
     <script src="script.js" defer></script>
 </body>

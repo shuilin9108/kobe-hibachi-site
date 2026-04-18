@@ -20,17 +20,13 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <!-- Google Ads + GA4 Global Site Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XE2J1LCPZ1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-XE2J1LCPZ1', {
-            debug_mode: true
-        });
-
+        gtag('config', 'G-XE2J1LCPZ1');
         gtag('config', 'AW-18087654321');
     </script>
 
@@ -70,12 +66,164 @@
             align-items: start;
         }
 
-        .booking-main-column {
+        .booking-main-column,
+        .booking-side-column {
             min-width: 0;
         }
 
-        .booking-side-column {
-            min-width: 0;
+        .booking-top-offer {
+            margin-bottom: 22px;
+            background: linear-gradient(90deg, #cf1717 0%, #9e1111 100%);
+            color: #fff;
+            border-radius: 16px;
+            padding: 16px 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .booking-top-offer strong {
+            color: #ffe27a;
+        }
+
+        .booking-top-offer small {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            opacity: 0.92;
+        }
+
+        .booking-main-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 34px rgba(0, 0, 0, 0.08);
+            padding: 42px 28px;
+            text-align: center;
+        }
+
+        .booking-kicker {
+            margin: 0 0 14px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #c91515;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .booking-main-card h3 {
+            margin: 0 0 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            line-height: 1.12;
+            font-weight: 900;
+            color: #111;
+        }
+
+        .booking-main-card p {
+            max-width: 760px;
+            margin: 0 auto 16px;
+            color: var(--text-light);
+            line-height: 1.85;
+            font-size: 1.05rem;
+        }
+
+        .booking-highlight-line {
+            margin: 0 auto 22px;
+            color: #c91515;
+            font-weight: 800;
+            font-size: 1.08rem;
+            line-height: 1.6;
+        }
+
+        .booking-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .booking-cta-primary,
+        .booking-cta-call {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 72px;
+            min-width: 320px;
+            padding: 20px 32px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: 0.4px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        .booking-cta-primary {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+            color: #fff;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+        }
+
+        .booking-cta-call {
+            background: linear-gradient(135deg, #18a34a 0%, #117236 100%);
+            color: #fff;
+            box-shadow: 0 14px 30px rgba(17, 114, 54, 0.24);
+        }
+
+        .booking-cta-primary:hover,
+        .booking-cta-call:hover {
+            transform: translateY(-2px);
+            opacity: 0.98;
+        }
+
+        .booking-secure-note {
+            margin: 0 0 8px;
+            font-size: 0.98rem;
+            color: #555;
+            line-height: 1.65;
+        }
+
+        .booking-fast-note {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #c91515;
+            font-weight: 700;
+        }
+
+        .booking-help-card,
+        .booking-info-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            padding: 30px 24px;
+            margin-top: 26px;
+        }
+
+        .booking-help-card {
+            text-align: center;
+        }
+
+        .booking-help-card h3,
+        .booking-info-card h3 {
+            margin: 0 0 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #111;
+        }
+
+        .booking-help-card p,
+        .booking-info-card p {
+            color: var(--text-light);
+            line-height: 1.75;
+        }
+
+        .booking-help-card .btn {
+            margin-top: 14px;
+            justify-content: center;
         }
 
         .booking-offer-card {
@@ -262,24 +410,8 @@
             opacity: 0.96;
         }
 
-        .booking-top-offer {
-            margin-bottom: 22px;
-            background: linear-gradient(90deg, #cf1717 0%, #9e1111 100%);
-            color: #fff;
-            border-radius: 16px;
-            padding: 16px 18px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-        }
-
-        .booking-top-offer strong {
-            color: #ffe27a;
-        }
-
-        .booking-top-offer small {
-            display: block;
-            margin-top: 6px;
-            font-size: 12px;
-            opacity: 0.92;
+        .booking-mobile-bar {
+            display: none;
         }
 
         @media (max-width: 1024px) {
@@ -290,6 +422,10 @@
 
             .booking-offer-card h3 {
                 font-size: 24px;
+            }
+
+            .booking-main-card h3 {
+                font-size: 34px;
             }
         }
 
@@ -306,6 +442,27 @@
         }
 
         @media (max-width: 640px) {
+            .booking-main-card {
+                padding: 28px 18px;
+            }
+
+            .booking-main-card h3 {
+                font-size: 28px;
+            }
+
+            .booking-cta-row {
+                flex-direction: column;
+            }
+
+            .booking-cta-primary,
+            .booking-cta-call {
+                width: 100%;
+                min-width: 0;
+                font-size: 18px;
+                min-height: 62px;
+                padding: 18px 20px;
+            }
+
             .booking-offer-card {
                 padding: 20px 18px;
             }
@@ -316,6 +473,52 @@
 
             .booking-offer-code {
                 font-size: 22px;
+            }
+
+            .booking-mobile-bar {
+                display: flex;
+                gap: 8px;
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+                width: calc(100% - 20px);
+                max-width: 430px;
+                z-index: 999;
+                padding: 8px;
+                background: rgba(17, 17, 17, 0.94);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-radius: 16px;
+                box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.28);
+            }
+
+            .booking-mobile-bar a {
+                flex: 1;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 48px;
+                border-radius: 999px;
+                text-decoration: none;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.9rem;
+                font-weight: 800;
+            }
+
+            .booking-mobile-call {
+                background: var(--accent-color);
+                color: #fff;
+            }
+
+            .booking-mobile-book {
+                background: #fff;
+                color: #111;
+                border: 2px solid #111;
+            }
+
+            footer {
+                padding-bottom: 120px;
             }
         }
     </style>
@@ -377,135 +580,65 @@
                         <p>$50 deposit required • $500 minimum per event</p>
                     </div>
 
-                    <div class="fade-in"
-                        style="background:#fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); padding: 42px 28px; text-align: center;">
+                    <div class="booking-main-card fade-in">
 
-                        <p style="
-                            margin: 0 0 14px;
-                            font-size: 16px;
-                            font-weight: 700;
-                            color: #c91515;
-                            text-transform: uppercase;
-                            letter-spacing: 0.6px;">
-                            Secure Online Reservation
-                        </p>
+                        <p class="booking-kicker">Secure Online Reservation</p>
 
-                        <h3 style="
-                            margin: 0 0 16px;
-                            font-family: 'Montserrat', sans-serif;
-                            font-size: 42px;
-                            line-height: 1.15;
-                            font-weight: 900;
-                            color: #111;">
-                            Click Below to Enter Our Booking System
-                        </h3>
+                        <h3>Book Online Or Call Us Now</h3>
 
-                        <p style="
-                            max-width: 760px;
-                            margin: 0 auto 16px;
-                            color: var(--text-light);
-                            line-height: 1.85;
-                            font-size: 1.08rem;">
+                        <p>
                             To complete your hibachi party reservation, continue to our secure online scheduling page
-                            powered by Acuity.
-                            After submitting your request, a team member will contact you to confirm final details,
-                            menu, travel fee, and deposit.
+                            powered by Acuity. If you want faster help before booking, call or text us directly and we
+                            can help you check availability, menu options, travel fee, and deposit details.
                         </p>
 
-                        <p style="
-                            margin: 0 auto 24px;
-                            color: #c91515;
-                            font-weight: 800;
-                            font-size: 1.12rem;
-                            line-height: 1.6;">
+                        <p class="booking-highlight-line">
                             Use code <strong>WELCOME50</strong> for <strong>$50 OFF</strong> your booking.
                         </p>
 
-                        <p style="
-                            margin-bottom: 20px;
-                            font-size: 28px;
-                            font-weight: 900;
-                            color: #d71919;
-                            line-height: 1.35;
-                            text-transform: uppercase;
-                            letter-spacing: 0.8px;
-                            background: #fff4f4;
-                            border: 2px solid #ffd1d1;
-                            border-radius: 14px;
-                            padding: 16px 18px;
-                            display: inline-block;
-                            box-shadow: 0 8px 20px rgba(215, 25, 25, 0.12);">
-                            👇 Click Below to Enter the Booking System
-                        </p>
-
-                        <div style="
-                            display:flex;
-                            justify-content:center;
-                            align-items:center;
-                            margin-bottom: 18px;">
+                        <div class="booking-cta-row">
                             <a href="https://app.acuityscheduling.com/schedule.php?owner=38994792" target="_blank"
-                                rel="noopener" id="continue-booking-btn"
-                                onclick="trackBookingStart('main_booking_button')" style="
-                               display: inline-flex;
-                               align-items: center;
-                               justify-content: center;
-                               min-width: 360px;
-                               min-height: 78px;
-                               padding: 24px 40px;
-                               border-radius: 999px;
-                               background: linear-gradient(135deg, #111 0%, #000 100%);
-                               color: #fff;
-                               text-decoration: none;
-                               font-family: 'Montserrat', sans-serif;
-                               font-size: 24px;
-                               font-weight: 900;
-                               letter-spacing: 0.6px;
-                               text-transform: uppercase;
-                               box-shadow: 0 14px 30px rgba(0,0,0,0.24);
-                               transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;">
-                                👉 Click Here to Book Your Date
+                                rel="noopener" id="continue-booking-btn" class="booking-cta-primary"
+                                onclick="trackBookingStart('main_booking_button')">
+                                Book Online Now
+                            </a>
+
+                            <a href="tel:+13477936589" class="booking-cta-call"
+                                onclick="trackPhoneClick('main_call_button')">
+                                Call (347) 793-6589
                             </a>
                         </div>
 
-                        <p style="
-                            margin-top: 0;
-                            margin-bottom: 10px;
-                            font-size: 0.98rem;
-                            color: #555;
-                            line-height: 1.65;">
+                        <p class="booking-secure-note">
                             You will be redirected to our secure booking page hosted by Acuity Scheduling.
                         </p>
 
-                        <p style="
-                            margin: 0;
-                            font-size: 0.95rem;
-                            color: #c91515;
-                            font-weight: 700;">
-                            Weekend dates fill fast — reserve early.
+                        <p class="booking-fast-note">
+                            Weekend dates fill fast — call or book early.
                         </p>
                     </div>
 
-                    <div class="info-card fade-in" style="text-align: center; margin-top: 30px;">
-                        <h3 style="justify-content: center;">Need Help Booking?</h3>
-                        <p style="margin-bottom: 15px; color: var(--text-light);">
-                            Call or text us directly if you have any questions before reserving your date.
+                    <div class="booking-help-card fade-in">
+                        <h3>Need Help Before Booking?</h3>
+                        <p>
+                            If you have questions about menu choices, headcount, travel fee, deposit, or availability,
+                            call or text us directly before submitting your reservation.
                         </p>
-                        <a href="tel:+13477936589" class="btn btn-dark" style="justify-content: center;"
-                            onclick="trackPhoneClick('booking_page_call_button')">
+                        <a href="tel:+13477936589" class="btn btn-dark" onclick="trackPhoneClick('help_card_call_button')">
                             Call (347) 793-6589
                         </a>
                     </div>
 
-                    <div class="info-card fade-in" style="margin-top: 30px;">
+                    <div class="booking-info-card fade-in">
                         <h3>🚗 Travel Fee</h3>
-                        <p style="color: var(--text-light); margin-bottom: 12px; font-size: 0.95rem;">
+                        <p style="margin-bottom: 12px; font-size: 0.95rem;">
                             Travel fee is based on distance from 5301 8th Ave, Brooklyn, NY 11220.
                         </p>
                         <ul>
                             <li><strong>0–30 miles:</strong> Free</li>
                             <li><strong>Over 30 miles:</strong> $1 per mile after 30</li>
                         </ul>
-                        <p style="margin-top: 15px; font-size: 0.92rem; color: var(--text-light);">
+                        <p style="margin-top: 15px; font-size: 0.92rem;">
                             Examples:
                         </p>
                         <ul>
@@ -513,8 +646,20 @@
                             <li><strong>45 miles:</strong> $15 travel fee</li>
                             <li><strong>60 miles:</strong> $30 travel fee</li>
                         </ul>
-                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--accent-color); font-weight: 600;">
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--accent-color); font-weight: 700;">
                             Final total and travel fee will always be confirmed before deposit is collected.
+                        </p>
+                    </div>
+
+                    <div class="booking-info-card fade-in">
+                        <h3>After Booking</h3>
+                        <p style="margin-bottom: 10px;">
+                            After you submit your reservation request through Acuity, our team will contact you to confirm
+                            final details, menu, travel fee, and deposit.
+                        </p>
+                        <p style="font-size: 0.95rem;">
+                            If you later want your own custom thank-you page after booking, that redirect needs to be set
+                            inside your Acuity confirmation settings.
                         </p>
                     </div>
 
@@ -649,10 +794,13 @@
         </div>
     </footer>
 
-    <div class="sticky-book">
+    <div class="booking-mobile-bar">
+        <a href="tel:+13477936589" class="booking-mobile-call" onclick="trackPhoneClick('mobile_call_button')">
+            Call Now
+        </a>
         <a href="https://app.acuityscheduling.com/schedule.php?owner=38994792" target="_blank" rel="noopener"
-            class="btn btn-primary" id="mobile-booking-btn" onclick="trackBookingStart('mobile_booking_button')">
-            Book Online Now
+            class="booking-mobile-book" onclick="trackBookingStart('mobile_booking_button')">
+            Book Online
         </a>
     </div>
 
@@ -664,16 +812,14 @@
 
             gtag('event', 'booking_click', {
                 event_category: 'booking',
-                event_label: label,
-                debug_mode: true
+                event_label: label
             });
 
             gtag('event', 'generate_lead', {
                 event_category: 'booking',
                 event_label: label,
                 currency: 'USD',
-                value: 50,
-                debug_mode: true
+                value: 50
             });
 
             gtag('event', 'conversion', {
@@ -686,26 +832,9 @@
 
             gtag('event', 'phone_click', {
                 event_category: 'contact',
-                event_label: label,
-                debug_mode: true
+                event_label: label
             });
         }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const bookingBtn = document.getElementById('continue-booking-btn');
-
-            if (bookingBtn) {
-                bookingBtn.addEventListener('mouseenter', function () {
-                    bookingBtn.style.transform = 'translateY(-2px) scale(1.01)';
-                    bookingBtn.style.boxShadow = '0 18px 36px rgba(0,0,0,0.28)';
-                });
-
-                bookingBtn.addEventListener('mouseleave', function () {
-                    bookingBtn.style.transform = 'translateY(0) scale(1)';
-                    bookingBtn.style.boxShadow = '0 14px 30px rgba(0,0,0,0.24)';
-                });
-            }
-        });
     </script>
 </body>
 
