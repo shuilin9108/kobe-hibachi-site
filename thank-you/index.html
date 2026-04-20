@@ -1,288 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | Kobe Hibachi Catering</title>
-    <meta name="description"
-        content="Thank you for booking Kobe Hibachi Catering. We received your request and will contact you soon to confirm your hibachi party details.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
+<title>Thank You | Kobe Hibachi Catering</title>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XE2J1LCPZ1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+<link rel="stylesheet" href="../style.css">
 
-        gtag('config', 'G-XE2J1LCPZ1');
-        gtag('config', 'AW-18087654321');
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XE2J1LCPZ1"></script>
 
-        window.addEventListener('load', function () {
-            if (typeof gtag !== 'function') return;
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XE2J1LCPZ1');
+gtag('config', 'AW-18087654321');
 
-            gtag('event', 'thank_you_page_view', {
-                event_category: 'booking',
-                event_label: 'thank_you_page'
-            });
+window.onload = function(){
+    hydrate();
+};
 
-            gtag('event', 'generate_lead', {
-                event_category: 'booking',
-                event_label: 'thank_you_page',
-                value: 50,
-                currency: 'USD'
-            });
+function read(key){
+    try{
+        return JSON.parse(sessionStorage.getItem(key));
+    }catch{
+        return null;
+    }
+}
 
-            gtag('event', 'conversion', {
-                'send_to': 'AW-18087654321/7rjMCM7K1ZscELHn7rBD'
-            });
-        });
+function money(v){
+    return "$" + Number(v||0).toFixed(2);
+}
 
-        function trackPhoneClick(label) {
-            if (typeof gtag !== 'function') return;
+function set(id,val){
+    const el=document.getElementById(id);
+    if(el) el.innerText=val;
+}
 
-            gtag('event', 'phone_click', {
-                event_category: 'contact',
-                event_label: label
-            });
-        }
-    </script>
+function hydrate(){
+    const draft = read("kobeBookingDraft") || {};
+    const result = read("kobeBookingResult") || {};
 
-    <style>
-        .thankyou-page {
-            min-height: 100vh;
-            background:
-                linear-gradient(135deg, rgba(17, 17, 17, 0.9), rgba(17, 17, 17, 0.78)),
-                url('../images/backyard-hibachi-party.jpg') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 140px 20px 80px;
-        }
+    const customer = draft.customer || {};
+    const event = draft.event || {};
+    const pricing = draft.pricingSnapshot || {};
+    const shared = draft.shared || {};
 
-        .thankyou-card {
-            width: 100%;
-            max-width: 900px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 22px;
-            padding: 44px 32px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
+    const total = pricing.totalPrice || 0;
+    const deposit = pricing.deposit || 50;
 
-        .thankyou-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 999px;
-            background: rgba(255, 77, 0, 0.1);
-            color: var(--accent-color);
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 18px;
-        }
+    set("bookingId", result.bookingId || "Pending");
+    set("name", customer.firstName + " " + customer.lastName);
+    set("phone", customer.phone);
+    set("date", event.date);
+    set("time", event.time);
+    set("guests", event.guestCount);
+    set("total", money(total));
+    set("deposit", money(deposit));
+    set("remain", money(total - deposit));
+    set("promo", shared.promoCode || "None");
+}
+</script>
 
-        .thankyou-card h1 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            line-height: 1.15;
-            font-weight: 900;
-            color: #111;
-            margin-bottom: 16px;
-        }
+<style>
+body{
+    font-family:sans-serif;
+    background:#111;
+    color:#fff;
+    padding:40px;
+}
 
-        .thankyou-lead {
-            max-width: 720px;
-            margin: 0 auto 22px;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
+.card{
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    color:#000;
+    padding:30px;
+    border-radius:20px;
+}
 
-        .thankyou-highlight {
-            margin: 0 auto 26px;
-            max-width: 760px;
-            background: #fff4f4;
-            border: 2px solid #ffd2d2;
-            color: #b81414;
-            border-radius: 16px;
-            padding: 18px 18px;
-            font-weight: 700;
-            line-height: 1.7;
-        }
+h1{
+    text-align:center;
+}
 
-        .thankyou-steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin: 28px 0 34px;
-            text-align: left;
-        }
+.box{
+    margin-top:20px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
 
-        .thankyou-step {
-            background: #f8f8f8;
-            border-radius: 16px;
-            padding: 22px 18px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        }
-
-        .thankyou-step-number {
-            width: 40px;
-            height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255, 77, 0, 0.12);
-            color: var(--accent-color);
-            font-family: var(--font-heading);
-            font-weight: 900;
-            margin-bottom: 12px;
-        }
-
-        .thankyou-step h3 {
-            font-family: var(--font-heading);
-            font-size: 1.05rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: #111;
-        }
-
-        .thankyou-step p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .thankyou-actions {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 10px;
-        }
-
-        .thankyou-actions .btn {
-            min-width: 240px;
-            justify-content: center;
-        }
-
-        .thankyou-note {
-            margin-top: 20px;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-
-        @media (max-width: 768px) {
-            .thankyou-card {
-                padding: 32px 20px;
-            }
-
-            .thankyou-card h1 {
-                font-size: 2.2rem;
-            }
-
-            .thankyou-steps {
-                grid-template-columns: 1fr;
-            }
-
-            .thankyou-actions .btn {
-                width: 100%;
-                min-width: 0;
-            }
-        }
-    </style>
+.btn{
+    display:block;
+    margin-top:20px;
+    padding:15px;
+    text-align:center;
+    background:#22c55e;
+    color:#fff;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="../">
-                    <img src="../images/kobe-hibachi-logo.png" alt="Kobe Hibachi Catering Logo"
-                        title="Kobe Hibachi Catering" width="40" height="52" loading="eager" />
-                    <span class="logo-text">Kobe <span class="accent">Hibachi</span></span>
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="../">Home</a></li>
-                <li><a href="../menu/">Menu</a></li>
-                <li><a href="../about/">About</a></li>
-                <li><a href="../faq/">FAQ</a></li>
-                <li><a href="../#service-areas">Locations</a></li>
-                <li><a href="../blog/">Blog</a></li>
-                <li><a href="../booking/" class="btn-nav">Book Now</a></li>
-            </ul>
-            <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+<div class="card">
 
-    <main class="thankyou-page">
-        <div class="thankyou-card">
-            <div class="thankyou-badge">Reservation Request Received</div>
-            <h1>Thank You For Booking Kobe Hibachi Catering</h1>
+<h1>Thank You</h1>
 
-            <p class="thankyou-lead">
-                Your hibachi party request has been received. Our team will contact you soon to confirm your event date,
-                final headcount, menu choices, travel fee, and deposit details.
-            </p>
+<p style="text-align:center;">Your booking request was submitted.</p>
 
-            <div class="thankyou-highlight">
-                Weekend dates fill fast. If your event is coming up soon, the fastest way to confirm details is to call or text us directly at <strong>(347) 793-6589</strong>.
-            </div>
+<div class="box">
+Booking ID: <b id="bookingId"></b>
+</div>
 
-            <div class="thankyou-steps">
-                <div class="thankyou-step">
-                    <div class="thankyou-step-number">1</div>
-                    <h3>We Review Your Request</h3>
-                    <p>We’ll go over your preferred date, guest count, and service area details.</p>
-                </div>
-                <div class="thankyou-step">
-                    <div class="thankyou-step-number">2</div>
-                    <h3>We Confirm Pricing</h3>
-                    <p>We’ll confirm your final total, travel fee if any, and deposit instructions.</p>
-                </div>
-                <div class="thankyou-step">
-                    <div class="thankyou-step-number">3</div>
-                    <h3>Your Date Gets Secured</h3>
-                    <p>Once everything is confirmed, your hibachi party date is officially locked in.</p>
-                </div>
-            </div>
+<div class="box">
+Name: <b id="name"></b><br>
+Phone: <b id="phone"></b><br>
+Date: <b id="date"></b><br>
+Time: <b id="time"></b><br>
+Guests: <b id="guests"></b>
+</div>
 
-            <div class="thankyou-actions">
-                <a href="tel:+13477936589" class="btn btn-primary"
-                    onclick="trackPhoneClick('thankyou_call_button')">
-                    Call (347) 793-6589
-                </a>
-                <a href="../menu/" class="btn btn-secondary">
-                    View Menu
-                </a>
-            </div>
+<div class="box">
+Total: <b id="total"></b><br>
+Deposit: <b id="deposit"></b><br>
+Remaining: <b id="remain"></b><br>
+Promo: <b id="promo"></b>
+</div>
 
-            <p class="thankyou-note">
-                Need to make changes? Call or text us directly and we’ll help with updates to your event details.
-            </p>
-        </div>
-    </main>
+<a 
+href="https://buy.stripe.com/9B6eVeabl5qXfbQ85Y2kw00"
+target="_blank"
+class="btn">
+Pay Deposit Now
+</a>
 
-    <script src="../script.js" defer></script>
+<div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+
+    <a href="../" class="btn" style="background:#111;">
+        Back to Home
+    </a>
+
+    <a href="../booking/" class="btn" style="background:#f59e0b;">
+        Book Another Event
+    </a>
+
+</div>
+</div>
+
 </body>
-
 </html>
